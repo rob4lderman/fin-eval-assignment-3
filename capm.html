@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Fin-Eval: Assignment 3</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Fin-Eval: Assignment 3</h2>
+
+<p>Rob Alderman<br/>
+<a href="https://www.coursera.org/learn/investments/outline?module=7TIU9">Financial Evaluation and Investment Strategy</a><br/>
+<a href="https://www.coursera.org/learn/investments/lecture/meglV/assignment-3-analyzing-identifying-three-mystery-securities">Assignment 3</a><br/>
+Sept 2015</p>
+
+<p><br /></p>
+
+<h3>Data source</h3>
+
+<p><a href="ThreeMysterySecurities.xlsx">ThreeMysterySecurities.xlsx</a>
+from <a href="https://www.coursera.org/learn/investments/supplement/dgfBm/module-2-spreadsheets-and-other-resources">https://www.coursera.org/learn/investments/supplement/dgfBm/module-2-spreadsheets-and-other-resources</a>  </p>
+
+<p>Source for U.S. Stock Returns and U.S. Treasury Bill Rates: <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth R. French Data Library</a><br/>
+For defintions of Fama-French Factors (Mkt_RF, SMB, &amp; HML), see <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_factors.html">here</a>  </p>
+
+<pre><code class="r"># Need to set JAVA_HOME and PATH, for read.xlsx
+Sys.setenv(JAVA_HOME=&quot;C:\\fox\\java\\jre&quot;)
+p &lt;- Sys.getenv(&quot;PATH&quot;)
+p1 &lt;- paste(&quot;C:\\fox\\java\\jre\\bin\\j9vm;&quot;, p, sep=&quot;&quot;)
+Sys.setenv(PATH=p1)
+
+library(xlsx)
+data &lt;- read.xlsx(&quot;ThreeMysterySecurities.xlsx&quot;,
+                  sheetIndex=1,
+                  rowIndex=4:244,
+                  colIndex=c(1:5,7:9))
+str(data)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    240 obs. of  8 variables:
+##  $ date      : num  2e+05 2e+05 2e+05 2e+05 2e+05 ...
+##  $ Mkt_RF    : num  1.8 3.63 2.18 2.11 2.9 2.72 3.72 0.55 3.35 -1.52 ...
+##  $ SMB       : num  -2.95 -0.33 -0.38 -0.42 -2.25 3.06 2.23 1.83 -2.07 -3.95 ...
+##  $ HML       : num  1.64 0.38 -2.05 1.7 1.92 -2.99 -2.24 1.93 -0.95 -0.09 ...
+##  $ RF        : num  0.42 0.4 0.46 0.44 0.54 0.47 0.45 0.47 0.43 0.47 ...
+##  $ Security.1: num  1.67 3.14 0.38 2.6 2.11 7.05 5.8 1.25 -1.64 -7.42 ...
+##  $ Security.2: num  4.59 -1.24 5.91 -4.35 3.92 -0.92 -3.47 4.57 2.89 2.79 ...
+##  $ Security.3: num  -1.71 7.74 6.28 6.01 2.26 ...
+</code></pre>
+
+<pre><code class="r">head(data)
+</code></pre>
+
+<pre><code>##     date Mkt_RF   SMB   HML   RF Security.1 Security.2 Security.3
+## 1 199501   1.80 -2.95  1.64 0.42       1.67       4.59      -1.71
+## 2 199502   3.63 -0.33  0.38 0.40       3.14      -1.24       7.74
+## 3 199503   2.18 -0.38 -2.05 0.46       0.38       5.91       6.28
+## 4 199504   2.11 -0.42  1.70 0.44       2.60      -4.35       6.01
+## 5 199505   2.90 -2.25  1.92 0.54       2.11       3.92       2.26
+## 6 199506   2.72  3.06 -2.99 0.47       7.05      -0.92      10.45
+</code></pre>
+
+<pre><code class="r">data$Security.1_RF &lt;- data$Security.1 - data$RF
+data$Security.2_RF &lt;- data$Security.2 - data$RF
+data$Security.3_RF &lt;- data$Security.3 - data$RF
+</code></pre>
+
+<p><br /></p>
+
+<h3>Question 1</h3>
+
+<p>Fill in the table for <em>Mystery Security #1</em>.<br/>
+What&#39;s the identity of the mystery security?  What are its characteristics?</p>
+
+<pre><code class="r">capm.sec1 &lt;- lm(Security.1_RF ~ Mkt_RF, data=data)
+summary(capm.sec1)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.1_RF ~ Mkt_RF, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.9906  -3.2286  -0.6777   2.2818  30.5005 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.89703    0.39361  -2.279   0.0236 *  
+## Mkt_RF       1.73372    0.08655  20.032   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.029 on 238 degrees of freedom
+## Multiple R-squared:  0.6277, Adjusted R-squared:  0.6261 
+## F-statistic: 401.3 on 1 and 238 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<pre><code class="r">fac3.sec1 &lt;- lm(Security.1_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec1)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.1_RF ~ Mkt_RF + SMB + HML, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.0804  -3.4087  -0.8734   2.3941  30.3241 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.98466    0.39412  -2.498   0.0132 *  
+## Mkt_RF       1.72821    0.09011  19.180   &lt;2e-16 ***
+## SMB          0.21753    0.12094   1.799   0.0734 .  
+## HML          0.22007    0.12824   1.716   0.0875 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.995 on 236 degrees of freedom
+## Multiple R-squared:  0.635,  Adjusted R-squared:  0.6304 
+## F-statistic: 136.9 on 3 and 236 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<pre><code class="r">library(ggplot2)
+qplot(y=Security.1_RF, x=Mkt_RF, data=data) +
+    ggtitle(&quot;CAPM - Security 1&quot;) + 
+    geom_hline(y=0,colour=&quot;lightgray&quot;) +
+    geom_vline(x=0,colour=&quot;lightgray&quot;) +
+    geom_abline(intercept = coef(capm.sec1)[&quot;(Intercept)&quot;], 
+                slope = coef(capm.sec1)[&quot;Mkt_RF&quot;], 
+                colour=&quot;blue&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2"/> </p>
+
+<table><thead>
+<tr>
+<th>Security 1</th>
+<th>Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Avg return</td>
+<td>0.5017917</td>
+</tr>
+<tr>
+<td>Avg excess return</td>
+<td>0.2834167</td>
+</tr>
+<tr>
+<td>CAPM alpha</td>
+<td>-0.8970268</td>
+</tr>
+<tr>
+<td>CAPM beta</td>
+<td>1.7337154</td>
+</tr>
+<tr>
+<td>CAPM R<sup>2</sup></td>
+<td>0.6276963</td>
+</tr>
+<tr>
+<td>3-factor alpha</td>
+<td>-0.9846608</td>
+</tr>
+<tr>
+<td>3-factor market beta</td>
+<td>1.728207</td>
+</tr>
+<tr>
+<td>3-factor size beta</td>
+<td>0.2175268</td>
+</tr>
+<tr>
+<td>3-factor value beta</td>
+<td>0.2200711</td>
+</tr>
+<tr>
+<td>3-factor R<sup>2</sup></td>
+<td>0.6349971</td>
+</tr>
+</tbody></table>
+
+<p>Security 1 has beta &gt; 1.  It amplifies market volatility. alpha &lt; 0, so it underperforms w/r/t market volatility.
+Its average return is less than that of the market. 
+About 63% of volatility is explained by the market.  The 3-factor model didn&#39;t improve R<sup>2</sup>.
+The coefficients on size and value are small and the market coefficient hardly changed from the CAPM model.
+So this security is a mid-cap stock that&#39;s very sensitive to market conditions.</p>
+
+<p>Disaster.  Low return combined with high beta.  Underperforms w/r/t volatility (alpha).  It also
+underperforms the market in terms of return.  Looks like a mutual fund (mid-high R<sup>2</sup>) focused
+on small-cap staocks (slight correlation with size and value).</p>
+
+<p><br /></p>
+
+<h3>Question 2</h3>
+
+<p>Fill in the table for <em>Mystery Security #2</em>.<br/>
+What&#39;s the identity of the mystery security?  What are its characteristics?</p>
+
+<pre><code class="r">capm.sec2 &lt;- lm(Security.2_RF ~ Mkt_RF, data=data)
+summary(capm.sec2)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.2_RF ~ Mkt_RF, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.951  -3.374   0.855   3.018  28.785 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.89547    0.43760   2.046   0.0418 *  
+## Mkt_RF       0.44628    0.09622   4.638  5.8e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.703 on 238 degrees of freedom
+## Multiple R-squared:  0.08289,    Adjusted R-squared:  0.07904 
+## F-statistic: 21.51 on 1 and 238 DF,  p-value: 5.805e-06
+</code></pre>
+
+<pre><code class="r">fac3.sec2 &lt;- lm(Security.2_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec2)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.2_RF ~ Mkt_RF + SMB + HML, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -28.6391  -3.1278   0.5032   3.0448  28.8169 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.72909    0.42662   1.709 0.088768 .  
+## Mkt_RF       0.55502    0.09754   5.690 3.74e-08 ***
+## SMB         -0.11791    0.13091  -0.901 0.368680    
+## HML          0.50720    0.13882   3.654 0.000318 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.489 on 236 degrees of freedom
+## Multiple R-squared:  0.1476, Adjusted R-squared:  0.1368 
+## F-statistic: 13.62 on 3 and 236 DF,  p-value: 3.158e-08
+</code></pre>
+
+<pre><code class="r">library(ggplot2)
+qplot(y=Security.2_RF, x=Mkt_RF, data=data) +
+    ggtitle(&quot;CAPM - Security 2&quot;) + 
+    geom_hline(y=0,colour=&quot;lightgray&quot;) +
+    geom_vline(x=0,colour=&quot;lightgray&quot;) +
+    geom_abline(intercept = coef(capm.sec2)[&quot;(Intercept)&quot;], 
+                slope = coef(capm.sec2)[&quot;Mkt_RF&quot;], 
+                colour=&quot;blue&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAA6lBMVEUAAAAAADoAAGYAAP8AOjoAOpAAZrY6AAA6ADo6AGY6OgA6Ojo6OpA6ZpA6ZrY6kJA6kNtmAABmADpmAGZmOjpmOpBmZjpmZmZmZrZmkJBmtv9/f39/f5V/f6t/lcF/q9aQOgCQOjqQOmaQZpCQkGaQtpCQ27aQ29uQ2/+Vweurf6ur1v+2ZgC2Zjq2tma225C2/7a2/9u2///BlX/BlavBwdbB6//T09PWq3/W///bkDrbkGbb29vb2//b/7bb/9vb///l5eXrwZXr///y8vL/tmb/1qv/25D/29v//7b//9b//9v//+v///+CCSzlAAAACXBIWXMAAAsSAAALEgHS3X78AAAX6UlEQVR4nO2dC3vcxnWGITkircRNKblXsrao1E5Ik60TWe6K2zYVaUpbeon//3eCyy4WwMwZfJg5IC7zvY/NvQEHR3gxB4MBFpukJEqSsRMg40DxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxkULxPfmfsRNQYpHiH14lSXJSPF0np/s3kuzpw6vn77LX2/Pioc519vlRR9jXF9vzE2NJRqhZsETxm+PTXEmu8eHV7158zB9y/Z+eXTy8/m3+bPO7ly1b10f55tBhPp+kIf7hVfZyPUvzCxS/k5Npzv48//HLi7347IOH19/lctf/2hKfNeZ8lkzh9jxJ8m1lc5w/FDNmb2/ffpc8++PrP2UfHl0XEYptJJ9hN+/cWKD4zZcHEdcnxWawF3/68PqPX2dy//BjS3zV2IvJ1y8+ZnPkTyvx5/lWUJb6cvM4tS5vPixQ/KdD6c2d5JW4Vuovrk/Tze837VKf76zzhl7MnGndBTmIP6n28fl7tfmBHcQUWbb49a5al527rPZn7tYn6frEEJ8W7o+yzmDBST5nWhd/eujcZbV+Xcmeqfclit+V3u3/7jvzReEuP8vcbb76v7cXO/HrZlc+m3MnPHWJ37z8S1XpN8fNbv5sWKD4Xecu69uXbT+v8DXx27fff/Wx3eLLKbPJ9uXCKPU18dvzqm9Y9CBnyQLFl60wP5wr+t9FZ74mPmvmJ2lbfNF5y7sDxZPdppLV87yQ5wf9DfFZhF2ZmGe/rmCJ4vcDOHst6+d/rovP3zb38ddJ2bvLD+fyZpwdzhXHaq+SZ9+/rMSXzouBgiJyshsYmh+LFD80tq7h3KB4D9Yz7dDVofjebI53Pf9Z01P8rQf3PjMZeC3aRCeZlUoUnVzQNUPxCsQn/n40Rly0yWrsBOqAa4YtXoH4WrxPYhQvQPFQ3ipRKJ7iQ6B4BIoXoHgob5UoFE/xIVA8AsULUDyUt0oUiqf4ECgegeIFKB7KWyUKxVN8CBSPQPECFA/lrRKF4ik+hCHEJ4lnGIpHmKz4/DJtvzAUj0DxFB8ASz0CxQuwcwflrRKF4ik+BIpHoHgBiofyVolC8RQfAsUjULwAxUN5q0SheIoPgeIRKF6A4qG8VaJQPMWHsHTxH87OrvK///ZfFN9g4eI/v0l//eHm87e/ZP9RfJ2Fi8/IxN9d5n+z52cZ7qmjYTV2AuG4xX84u0zvrtLH9ze7N3y2SLZ4gSm3+PTusmrxFF+xcPGfL3Px3MebLFx83qt/w169haWLN/FJjOIFKB7KWyUKxVN8CBSPQPECFA/lrRKF4ik+BIpHoHgBiofyVolC8RQfAsUjULwAxUN5q0SheIoPgeIRKF6A4qG8VaJQPMWHQPEIFC9A8VDeKlEonuJDoHgEihegeChvlSgUT/EhUDwCxQtQPJS3ShSKp/gQKB6B4gUoHspbJQrFU3wIFI9A8QIUD+WtEoXiPcXfj8aIizZZjZ1AHXDNsMUrEF+L90mM4gUoHspbJQrFU3wIFI9A8QIUD+WtEoXiKT4EikegeAGKh/JWiULxFB8CxSNQvADFQ3mrRKF4ig+B4hEoXoDiobxVolA8xYdA8QgzEp8kWBSKR5iP+CQBzVM8AsX75IJD8Qgs9RQfAMUjULwAxUN5q0SheIoPgeIRKF6A4qG8VaJQPMWHQPEIFC9A8VDeKlEonuJDoHgEiheYrPjHn87Ovv2FvyZtsnDxn/PfEL/i78ebLFx8zt3V3WX66w832dOzjI6pY2E1dgLhdIjPGv3dVfr4/mb32meLZIsXmHCL/5AV+6rFU3zFwsU//nSVN3ru4w0WLv5Dvle/ZK/eZOHiLfgkNkXx6DVWAhSPMEHx8FWVAhSPQPHOXIKheIS5lPoeCVI8wkw6d31KEsUjUDzFB8BSj0DxAuzcQXmrRKF4ig+B4hEoXoDiobxVolA8xYcQKH7XZad4KG+VKJMQvz9Ip3gob5UoFE/xIbDUI1C8AMVDeatEGUi838k+iofyVokyjHjP0/sUD+WtEoXiKT4ElnqECMT7QfFQ3ipRKJ7iQ6B4BIoXoHgob5UoFE/xIVA8AsULUDyUt0oUivcUfz8aIy7aZDV2AnXANcMWr0B8Ld4nMYoXoHgob5UoFE/xIVA8AsULUDyUt0oUiqf4ECgegeIFKB7KWyUKxVN8CBSPQPECFA/lrRKF4ik+BIpHoHgBiofyVolC8RQfAsUjULwAxUN5q0QJTGb/ValhxHveYJfiEYKSqb4cOYh431tqUzwCxVO8Byz1fViQ+D2meB9p7NxBeatEGUq8V5mmeChvlShzEd8nGsUjzKPU99qOKB5hHgM4FF/LWyXKcOJZ6g2iEO+zk2fnDspbJcp8xPPHiPZ5q0SZdqmvxeixIVE8wsCdu176zZG7w+wjiy9+OD6yX5NGVrgkvl/Bd4kH0thPMYD4z2ff3MT2+/GQu2HE96sX1bL0xT/+/Pj+Jr27LBt+mv+avLM+LIJ8fXZOtJLnVk3GBZSoY3bnp4X4q+KhpMcWWTGvFh9U6iGqBdwLywIb/oClPm20+DjEB5V6hMMC7u3L6ntkOJR47uNNohA/iV59tjtTiHK7qFK/Z8nH8b5XJZmMc5LGnj2HbDsJE1+ft1cy4kJX7o/NONZJjWvu0LyahIt/+PrdRMUHlfrGau+TTNNX/fnK/BgPJOTivXHriN989XGK4kM6dzriGy96iodKPcULefvPqlLqTfHetVnIZdxSv0TxdXonU+kwSn2vuVVysWOuGetSXeJfJSXPxX29T2KzFm8vwKh4d/keSrx9qQ7xAD6JzV68uRqXKv7/xXLvk9isxdvNL6zUp5vjvMpvz1nq64SI187FRnjnbnt+kq6PPiUv5P6dT2JzF99sQMWLhYnPe/VZB+9U1B6p+Dpl8+8pXij4WC6dR3lK4l9fOLxTvI94qYsH5dI9rqMk3j1siy2jyaLE+5R6ig9hKuILllbqOYADMmrnrr0lLPm07C3FVxi1X1X8J6Fr75MpxQtQPJS3SpSJi4dO0HmV+i++iF28yjVcgHhgOZYvVPhk17lmvsiIvsXrXL3XLR5ZjuV2Z9rivyilF5NRfHiU7i9N2pbTfue+8bavd2nN1JyXk8UtfthSX1Nn8956777xtualVy3n5WSRi1eJ4vWlyfJD4/q/ah6dS6/aDf0wGSRewiexiMSX8syzeYen9U3j3pjCi8OakZyXkznEb46TZxfOy6x9EluY+OokjSRMvDhXEI8tUqZYM2JDP0wmi9+enxbn5CneQWFudeso65J4odSDi5Tpdl7gEF8Kvz6ieAfd4k3z9d6brvjcucYVOEWXbv2bl5GLdzYwe6lvvTj015Kmeb1SXzV0hSHbh1cnhXn57Nz9aDzhonM57ilW7ln2r4rHUnb1fmdsSzrtdwrn1StwzbjEd4Nuo3Vm1+K7j6gbvfp2n+22MSZT/6w1RiN9TdqZjblD52nZJkFXvXTEqb5CVRVv+9La7x7E5w/CjRGMGPuJhF6cnvhFdO6ElepOxjKLdSC1+tJkfa9dbAfdaR2yE8U33y1eOXrubPENfMTb5kls5lviaxO6Bu7MqJL3RqCuw7VYxcsHVb2TsYoTxbcEdYg3egHyxIdI0CG6hviHV0dzEw/tJw/0LvXWftuq9kmzwYvl3sjTkXgRCBuWudVq8Z+SYtQ2UvHCEozFrQ4vdsuvNgIxH+NtOW9wLG6HWqnfnifit2ngbGoEiK+tm96l3j6R4hcqGqMzjV09mI81l17OC3TEl+dpxH59v5RK/Nd1fSX2X7R1xFzvCxVmn95YrK17XsunnUu/hl6hs493fGFyZuLbHS88me6iXI3VdwzuJs2toHW+ppaLp/MCFfFFS5/OcTxS6uV5G01+9wdIBuiGrarT7s7jt2o3YISpl/oA5wWK36SRm71PYmMN2dqGzXTEJ6v6IGxjstb+Jam/307oPqihV+i1eAc+iU1lrB4V313qK/GHffxhj98wX/+oGUjFeUE0Azi9Dt/qgKUeYNU+65LYxNeWuz/aKz/dOde5y6bKt2X/XBb7SX9pEjtekgg/nMv/rg4vm+Jv9428Pc9+qrKhl5/732WzQSwt/mnF23f3q/YbRo1v9earhp7UPp+Q+Fns40O8973qpb2+DfG3Fu8W8UVDb+wYDrlg/54hS32abt86b4QyDfFB9LzOzdLDz/+2L682t4/D853z/WS1XcHhuvqQTTlbM9D87hY/g318GH0vcGwdeu9Ytd8Uhusa7bw9XV18iPkUm98pvhOfxGYpXiryJSthotp7h8M10cr9YQaKl/NWidIjmdbq7CMePESvcmGpd+WtEqVfixf7a0apr+gcl6nNMZkbHO5Zn7DFt+uvIL4OUNybcSYnfjonaep5q0Tx//ZK46UhvtHOXfvcSYv/xFLfMU5UF28Wd+es7VOGXVl0TqJ0Pr4ocfLdbLFlNFmu+Lpz4YDOdwn7CYBQsQzZhtGnVy9/tjLOort3DcIC3NMkFF/krRJFJRlbz10+7Hft752LQUd2VMR/ysr82nGZLbaMJosSXzq39OotZ3Oso/09cgEP71X28cVNyzcL/Jr0fiUGJFNr6NB97g6j/YLACfXqy2/If1rGpVd1qrUvJyPto/Mn7eKO3Nmy3uTt5ickvuzWt47mpvBr0oriBQvSgI11/NV5D5xDCGvkA1MSb2Hmvx9fXR23S0bSYBO/P4t+27bsvhWKkILBxMXfXaa//nCTPTnLWEVD7nzsHFRxi9+eJy/+2vxZmrur9PH9zVxbfLtdInehqF06YYY5XIFjTmE/WScmNKEWvz0/2Xz1sdm5q1r8HMQb42emeCdVL848Lt8/5s+sh3NW8ZaBnSmKf/j6XSa+eZJmTvv4+mquDqfQZGrXv8p7cFF8Mad4WUZrus5c+qDX4tfNw7kZ9eot4qFkLA1d6rodSj2GY88yIfHFV6Tn/EuTnadKjGSah+gN8djZOX+mJL4Ln8SmcBxf0UjGOuZePQkU392JpHgob5UoVTK1hu6q6QLgkC2YSyAqd7Y82v2i9KLFNxs6PhBzYGnir0+K0fq1fAckn8SGFt/Hm+WMatMQFqzPWL0cdzLi88O4/MzcvK65Q1ts6dySjHwxrUhv8da4kxKfH8rN67Qs4urQzjuSCRLvuAZn2uLT69P8dwrS6yWV+lZx17n4wSrePmLkiDsd8Q+vsmN4500OfRIbr3NnOVzzTsZ9eXU5RTl4B/c5piO+G5/ERhEvfaPFN5mmT0epp/iKpxbv/BbTkOL3U6IxKR7KG5qq8+uK/e5CUXu0lfreV1T75+IgdvHYbaR6JOO4TnZ1a/nAWuRdhZ/iobwdn/W4dZiYjHxGtZ94y+UZ9vAUD+YtvN/zdnFSMq6LZ8wz6nKpr20t+7Bil4/iobzNt3zuEWhPxn7VlEBSiRciVQGTxgZgzaX/eQKDuMRjzs3Vak2ml/c+4utjtua098a4LppCg2jE4w3dovO+9qFrOpcEl/jD5dzdG1NLvM9pwpwYxPcs7i7x7rbWIQG7Ase98RilnuLtefvc9NdR6t0NEhPvv4Mu4rdXDEt9G707PTdKfYd5RxTr4Zwb8zCPvXone+f619yBTd42UX/x7Wn3pV6B5YlvNPQBLrZ074NrvTTj0/6l3haG4k3M4v7098DZP8rigdnlNyi+jX2HPox4oM3Kpd45k2dkD5Yg3tGLG0S87xGUinjfhbeZufiunvuTiUdsOMU7LsDqXLgPMxaPHK09VamHdLgvxEB9Rl3q4UP0p+rcPaH4OXXu7k2SxPImRO4cnti2aKU8mkGQOKvBE+lB55rZTabc4rs3cNuG3X8srmu7Bhuau5WhrZXflrWsK8cJsQLP8dfDoqUL173EW0ZSOxaUQ/G3lstQ2uur9u8LGHOvFi0Zxtqq0bkzR1K7FnRr+zEiZNkdufgykc6dJD70REuneIwO8eBnLfGeKS1LvK3Ua5xc6yr1IH1OhcKlnuJN1M6oTuQmxiUs9S72zid3YwQnkEN27iTq7XxW4rGqTfEWjOJO8Z65gExAvH2HPqD4/vvWgUt9r4Qaufh3WUcWL3fihhPv0ZsepnO3p19CzauBvM2PJ76j507xQC6zEw8crU2+1PePEnepRw/Rp965c19QayXazl2vYZnZiMfLbZTiew/FTV28+4JaK/GJ9xl/fQLx+A7SmQxe6lWumpqTeJ/Ehhffo0us1KtXuU6S4qG8HZ+NJ171TKEnixafJE9R6mFWvbuDw+WyaPFal6BrD+BQvIsFi2epd/EEpR5n2CHbflA8lLdKFPGuV/2iUDzC9MX33pNQPMLExFscU3wE4q2SWeojFd+XvuLti6R4KG+VKPZSb9IxUU/xwsZG8VDeKlHAZLrKQqj48iXFQ3mrRBlHvPD9wgmLL344fka/Jt0NmIxuqTejT1z857Nvbmb1+/HdTGPkbuKl/vHnx/c36d1l2fDTswxnfYiH1dgJhOMu9YX4q+KhxGeLZIsXmGaL/3D2Zid+3+IpvuIpxXcefg7RucvFcx9v8oTiuwechhI/h179k1+BoxJlwuINsGU0WeI1dypRJlzqKd7Okjt3cxI/XqkXFux1By5fYhaP8yQXW6rcbBGG4hEonuIDYKlHWLL4ICgeylslCsVTfAgUj0DxAhQP5a0SheIpPgTjJsYd0/MqW38mLL7zsJ1X2QZA8RIUj8BST/EBsHOHQPECFA/lrRKF4ik+BEy8zw/yeUDxCE8ovrOzT/FQ3hpBkoTiYxSvdvMslnqEaMV3QfFQ3hpBnrTUd0LxUN4qUXg4R/EhUDwCxQtQPJS3ShSKp/gQ4hN/PxojLtpkNXYCdcA1wxavQHwt3icxihegeChvlSgUT/EhUDwCxQtQPJS3ShSKp/iQHxKieISJig85R0vxCBTfmUsQFI/AUk/xAVA8AsULUDyUt0oUiqf4ECgegeIFKB7KWyUKxVN8CBSPQPECFA/lrRKF4ik+BIpHoHgBiofyVolC8RQfAsUjULwAxUN5q0SheIoPgeIRKF6A4qG8VaJQPMWHQPEIFC9A8VDeKlEGEe971eZkxT/+dHb27S9z+DVpnAHEe1+nPVnxn9+k6Ycr/n68ycLF59xd3V2mv/5wkz09y+iYOhZWjVdJz/3lJOjIOWv0d1fp4/ub3WufLXLpLd6babb4D2d5oc/+r1o8xVcsWXyad+6u8kbPfbzBwsV/yPfql+zVmyxcvAWfxChegOKhvFWiUDzFh0DxCKH/vnJ4hOIllip+NzBG8RIUj0DxsxHPUt/BYsXv8laJQvELFd95noziFym++wwpxVN8ABSPwFIvQPFQ3ipRKJ7iQ6B4BIoXoHgob5UoFE/xIVA8AsULUDyUt0oUiqf4ECgegeIFKB7KWyUKxVN8CBSPQPECFA/lrRKF4ik+BIpHoHgBiofyVolC8RQfQnzi70djxEWbrIYImiR+84Frhi1egSFavPetdFjqESie4gMYZB/ve7s8ikeYsHhfKB6B4ik+AIpHoHgBiofyVolC8RQfAsUjULwAxUN5q0SheIoPgeIRKF6A4qG8VaJQPMWHQPEIFC9A8VDeKlEonuJDoHgEihegeChvlSgUT/EhxCd+PCb1k3cLSIbifVhAMhTvwwKSoXgfFpDMbMQTXSg+Uig+Uig+Uig+UuYhvvgd8/qPG4/KZBIJWTGzEP/57Jub5s+Zj8lkEglaMXMQ//jz4/ub9O6y3L5HZzKJBK2YOYjP/oX5v++qeBifySSShqyYyYv/cPZm9++bSkObTCJpyIqZvPiC/N83mV3rZBJJQ1bMfMRPpzM9mURCVsw8xBN1KD5SKD5SKD5SKD5SYhW/OT7K/l4/f7d9e5G/fPmu+iC/0+Dzd7snJyPmOCjRiv/y7z6mD//w0hRfPFu/+Hh4a5FEK/7lP12km38uxG/Pf3Oct/HdB+/KvxS/SDYv//M0/e/vC/HXJ2zx0bB5+ePvt3/4MRf/2xNzH//iY/nkaNQkhyRe8X/597/+S+Z7e/73//ix1eI/PbuobwuLJF7x7/7ju5NNUerXRqlf5716il8imdasXZfis/9a4rfnRxS/TMpueyk+r/vnrV798QnFkyVC8TvK3nySd+uigOIjheIjheIjheIjheIjheIjheIjheIj5W8C7hsIHJJfvAAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<table><thead>
+<tr>
+<th>Security 2</th>
+<th>Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Avg return</td>
+<td>1.4177083</td>
+</tr>
+<tr>
+<td>Avg excess return</td>
+<td>1.1993333</td>
+</tr>
+<tr>
+<td>CAPM alpha</td>
+<td>0.8954739</td>
+</tr>
+<tr>
+<td>CAPM beta</td>
+<td>0.4462778</td>
+</tr>
+<tr>
+<td>CAPM R<sup>2</sup></td>
+<td>0.0828929</td>
+</tr>
+<tr>
+<td>3-factor alpha</td>
+<td>0.7290924</td>
+</tr>
+<tr>
+<td>3-factor market beta</td>
+<td>0.5550224</td>
+</tr>
+<tr>
+<td>3-factor size beta</td>
+<td>-0.1179083</td>
+</tr>
+<tr>
+<td>3-factor value beta</td>
+<td>0.507204</td>
+</tr>
+<tr>
+<td>3-factor R<sup>2</sup></td>
+<td>0.1476172</td>
+</tr>
+</tbody></table>
+
+<p>Security 2 has excellent returns along with politive alpha and a small beta. 
+So it outperforms w/r/t market volatility (alpha &gt; 0).
+Its a defensive stock - it correlates with market volatility but in a muted fashion.<br/>
+The R<sup>2</sup> is woefully small, so most of the security&#39;s volatility is idiosyncratic.
+The 3 factor model showed a negative correlation with size and positive correlation with value.
+So this appears to be a Large-cap Value stock, necessity good (low beta)</p>
+
+<p><br /></p>
+
+<h3>Question 3</h3>
+
+<p>Fill in the table for <em>Mystery Security #3</em>.<br/>
+What&#39;s the identity of the mystery security?  What are its characteristics?</p>
+
+<pre><code class="r">capm.sec3 &lt;- lm(Security.3_RF ~ Mkt_RF, data=data)
+summary(capm.sec3)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.3_RF ~ Mkt_RF, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -11.1086  -2.6633  -0.6446   2.0288  17.2719 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.01483    0.28834   0.051    0.959    
+## Mkt_RF       1.38762    0.06340  21.886   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.417 on 238 degrees of freedom
+## Multiple R-squared:  0.6681, Adjusted R-squared:  0.6667 
+## F-statistic:   479 on 1 and 238 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<pre><code class="r">fac3.sec3 &lt;- lm(Security.3_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec3)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Security.3_RF ~ Mkt_RF + SMB + HML, data = data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.9278  -2.1091  -0.1292   1.8095  12.1429 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.33517    0.21563   1.554    0.121    
+## Mkt_RF       1.23171    0.04930  24.985   &lt;2e-16 ***
+## SMB         -0.01106    0.06617  -0.167    0.867    
+## HML         -0.93646    0.07016 -13.347   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.28 on 236 degrees of freedom
+## Multiple R-squared:  0.8185, Adjusted R-squared:  0.8162 
+## F-statistic: 354.7 on 3 and 236 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<pre><code class="r">library(ggplot2)
+qplot(y=Security.3_RF, x=Mkt_RF, data=data) +
+    ggtitle(&quot;CAPM - Security 3&quot;) + 
+    geom_hline(y=0,colour=&quot;lightgray&quot;) +
+    geom_vline(x=0,colour=&quot;lightgray&quot;) +
+    geom_abline(intercept = coef(capm.sec3)[&quot;(Intercept)&quot;], 
+                slope = coef(capm.sec3)[&quot;Mkt_RF&quot;], 
+                colour=&quot;blue&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<table><thead>
+<tr>
+<th>Security 3</th>
+<th>Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Avg return</td>
+<td>1.178</td>
+</tr>
+<tr>
+<td>Avg excess return</td>
+<td>0.959625</td>
+</tr>
+<tr>
+<td>CAPM alpha</td>
+<td>0.0148295</td>
+</tr>
+<tr>
+<td>CAPM beta</td>
+<td>1.3876195</td>
+</tr>
+<tr>
+<td>CAPM R<sup>2</sup></td>
+<td>0.6680658</td>
+</tr>
+<tr>
+<td>3-factor alpha</td>
+<td>0.3351697</td>
+</tr>
+<tr>
+<td>3-factor market beta</td>
+<td>1.231705</td>
+</tr>
+<tr>
+<td>3-factor size beta</td>
+<td>-0.0110649</td>
+</tr>
+<tr>
+<td>3-factor value beta</td>
+<td>-0.9364567</td>
+</tr>
+<tr>
+<td>3-factor R<sup>2</sup></td>
+<td>0.8184797</td>
+</tr>
+</tbody></table>
+
+<p>Performing at its CAPM benchmark (alpha = 0).<br/>
+Highly correlated with growth stocks.
+High R<sup>2</sup> in 3-factor model.
+Looks like an actively managed mutual fund of tech stocks.</p>
+
+<p><br /></p>
+
+<h3>Question 4</h3>
+
+<p>For each mystery security, does it have a small or large amount of idiosyncratic risk?</p>
+
+<p>Security 1:<br/>
+CAPM R<sup>2</sup> = 63%<br/>
+3-factor R<sup>2</sup> = 63%   </p>
+
+<p>About 37% of security 1&#39;s volatility is due to idiosyncratic (asset-specific) risk. </p>
+
+<p>Security 2:<br/>
+CAPM R<sup>2</sup> = 8.3%<br/>
+3-factor R<sup>2</sup> = 15%   </p>
+
+<p>About 85-90% of security 2&#39;s volatility is due to idiosyncratic (asset-specific) risk. </p>
+
+<p>Security 3:<br/>
+CAPM R<sup>2</sup> = 67%<br/>
+3-factor R<sup>2</sup> = 82%   </p>
+
+<p>About 20-30% of security 3&#39;s volatility is due to idiosyncratic (asset-specific) risk. </p>
+
+<p><br /></p>
+
+<h3>Question 5</h3>
+
+<p>For each mystery security, what portfolio combination of US Stock Market and Treasury Bills will
+yield the same CAPM BETA? </p>
+
+<p>CAPM BETA is the correlation between the asset&#39;s excess returns and the market&#39;s excess returns.
+What combination of Mkt + RF yields the same correlation?</p>
+
+<p>\[
+\begin{align*}
+[(w_1 \cdot Mkt + w_2 \cdot RF) - RF] &= \beta [ Mkt - RF ]
+\\
+(w_1 \cdot Mkt + (1 - w_1) \cdot RF)  &= RF + \beta [ Mkt - RF ]
+\\
+w_1 \cdot Mkt + RF - w_1 \cdot RF  &= RF + \beta \cdot Mkt - \beta \cdot RF
+\\
+w_1 \cdot Mkt - w_1 \cdot RF  &= \beta \cdot Mkt - \beta \cdot RF
+\end{align*}
+\]</p>
+
+<p>So in a portfolio combining the US Stock Market and Treasury Bills, the weight of US Stock Market
+allocation (\(w_1\)) corresponds to the CAPM beta for the portfolio.</p>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+
+## Fin-Eval: Assignment 3
+
+Rob Alderman  
+[Financial Evaluation and Investment Strategy](https://www.coursera.org/learn/investments/outline?module=7TIU9)  
+[Assignment 3](https://www.coursera.org/learn/investments/lecture/meglV/assignment-3-analyzing-identifying-three-mystery-securities)  
+Sept 2015
+
+<br />
+### Data source
+
+[ThreeMysterySecurities.xlsx](ThreeMysterySecurities.xlsx)
+from [https://www.coursera.org/learn/investments/supplement/dgfBm/module-2-spreadsheets-and-other-resources](https://www.coursera.org/learn/investments/supplement/dgfBm/module-2-spreadsheets-and-other-resources)  
+
+Source for U.S. Stock Returns and U.S. Treasury Bill Rates: [Kenneth R. French Data Library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)  
+For defintions of Fama-French Factors (Mkt_RF, SMB, & HML), see [here](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_factors.html)  
+
+```{r}
+
+# Need to set JAVA_HOME and PATH, for read.xlsx
+Sys.setenv(JAVA_HOME="C:\\fox\\java\\jre")
+p <- Sys.getenv("PATH")
+p1 <- paste("C:\\fox\\java\\jre\\bin\\j9vm;", p, sep="")
+Sys.setenv(PATH=p1)
+
+library(xlsx)
+data <- read.xlsx("ThreeMysterySecurities.xlsx",
+                  sheetIndex=1,
+                  rowIndex=4:244,
+                  colIndex=c(1:5,7:9))
+str(data)
+head(data)
+
+data$Security.1_RF <- data$Security.1 - data$RF
+data$Security.2_RF <- data$Security.2 - data$RF
+data$Security.3_RF <- data$Security.3 - data$RF
+
+```
+
+<br />
+### Question 1
+
+Fill in the table for *Mystery Security #1*.  
+What's the identity of the mystery security?  What are its characteristics?
+
+```{r}
+
+capm.sec1 <- lm(Security.1_RF ~ Mkt_RF, data=data)
+summary(capm.sec1)
+
+fac3.sec1 <- lm(Security.1_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec1)
+
+library(ggplot2)
+qplot(y=Security.1_RF, x=Mkt_RF, data=data) +
+    ggtitle("CAPM - Security 1") + 
+    geom_hline(y=0,colour="lightgray") +
+    geom_vline(x=0,colour="lightgray") +
+    geom_abline(intercept = coef(capm.sec1)["(Intercept)"], 
+                slope = coef(capm.sec1)["Mkt_RF"], 
+                colour="blue")
+
+```
+
+
+| Security 1                |  Values                                   |
+| ---------------------     | ----------------------------------------- |
+| Avg return                | `r mean(data$Security.1)`                 |
+| Avg excess return         | `r mean(data$Security.1_RF)`              |
+| CAPM alpha                | `r coef(capm.sec1)[["(Intercept)"]]`      |
+| CAPM beta                 | `r coef(capm.sec1)[["Mkt_RF"]]`           |
+| CAPM R<sup>2</sup>        | `r summary(capm.sec1)$r.squared`          |
+| 3-factor alpha            | `r coef(fac3.sec1)[["(Intercept)"]]`      |
+| 3-factor market beta      | `r coef(fac3.sec1)[["Mkt_RF"]]`           |
+| 3-factor size beta        | `r coef(fac3.sec1)[["SMB"]]`              |
+| 3-factor value beta       | `r coef(fac3.sec1)[["HML"]]`              |
+| 3-factor R<sup>2</sup>    | `r summary(fac3.sec1)$r.squared`          |
+
+
+Security 1 has beta > 1.  It amplifies market volatility. alpha < 0, so it underperforms w/r/t market volatility.
+Its average return is less than that of the market. 
+About 63% of volatility is explained by the market.  The 3-factor model didn't improve R<sup>2</sup>.
+The coefficients on size and value are small and the market coefficient hardly changed from the CAPM model.
+So this security is a mid-cap stock that's very sensitive to market conditions.
+
+Disaster.  Low return combined with high beta.  Underperforms w/r/t volatility (alpha).  It also
+underperforms the market in terms of return.  Looks like a mutual fund (mid-high R<sup>2</sup>) focused
+on small-cap staocks (slight correlation with size and value).
+
+
+
+<br />
+### Question 2
+
+Fill in the table for *Mystery Security #2*.  
+What's the identity of the mystery security?  What are its characteristics?
+
+```{r}
+
+capm.sec2 <- lm(Security.2_RF ~ Mkt_RF, data=data)
+summary(capm.sec2)
+
+fac3.sec2 <- lm(Security.2_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec2)
+
+library(ggplot2)
+qplot(y=Security.2_RF, x=Mkt_RF, data=data) +
+    ggtitle("CAPM - Security 2") + 
+    geom_hline(y=0,colour="lightgray") +
+    geom_vline(x=0,colour="lightgray") +
+    geom_abline(intercept = coef(capm.sec2)["(Intercept)"], 
+                slope = coef(capm.sec2)["Mkt_RF"], 
+                colour="blue")
+```
+
+
+| Security 2                |  Values                                   |
+| ---------------------     | ----------------------------------------- |
+| Avg return                | `r mean(data$Security.2)`                 |
+| Avg excess return         | `r mean(data$Security.2_RF)`              |
+| CAPM alpha                | `r coef(capm.sec2)[["(Intercept)"]]`      |
+| CAPM beta                 | `r coef(capm.sec2)[["Mkt_RF"]]`           |
+| CAPM R<sup>2</sup>        | `r summary(capm.sec2)$r.squared`          |
+| 3-factor alpha            | `r coef(fac3.sec2)[["(Intercept)"]]`      |
+| 3-factor market beta      | `r coef(fac3.sec2)[["Mkt_RF"]]`           |
+| 3-factor size beta        | `r coef(fac3.sec2)[["SMB"]]`              |
+| 3-factor value beta       | `r coef(fac3.sec2)[["HML"]]`              |
+| 3-factor R<sup>2</sup>    | `r summary(fac3.sec2)$r.squared`          |
+
+
+Security 2 has excellent returns along with politive alpha and a small beta. 
+So it outperforms w/r/t market volatility (alpha > 0).
+Its a defensive stock - it correlates with market volatility but in a muted fashion.  
+The R<sup>2</sup> is woefully small, so most of the security's volatility is idiosyncratic.
+The 3 factor model showed a negative correlation with size and positive correlation with value.
+So this appears to be a Large-cap Value stock, necessity good (low beta)
+
+<br />
+### Question 3
+
+Fill in the table for *Mystery Security #3*.  
+What's the identity of the mystery security?  What are its characteristics?
+
+```{r}
+
+capm.sec3 <- lm(Security.3_RF ~ Mkt_RF, data=data)
+summary(capm.sec3)
+
+fac3.sec3 <- lm(Security.3_RF ~ Mkt_RF + SMB + HML, data=data)
+summary(fac3.sec3)
+
+library(ggplot2)
+qplot(y=Security.3_RF, x=Mkt_RF, data=data) +
+    ggtitle("CAPM - Security 3") + 
+    geom_hline(y=0,colour="lightgray") +
+    geom_vline(x=0,colour="lightgray") +
+    geom_abline(intercept = coef(capm.sec3)["(Intercept)"], 
+                slope = coef(capm.sec3)["Mkt_RF"], 
+                colour="blue")
+```
+
+
+| Security 3                |  Values                                   |
+| ---------------------     | ----------------------------------------- |
+| Avg return                | `r mean(data$Security.3)`                 |
+| Avg excess return         | `r mean(data$Security.3_RF)`              |
+| CAPM alpha                | `r coef(capm.sec3)[["(Intercept)"]]`      |
+| CAPM beta                 | `r coef(capm.sec3)[["Mkt_RF"]]`           |
+| CAPM R<sup>2</sup>        | `r summary(capm.sec3)$r.squared`          |
+| 3-factor alpha            | `r coef(fac3.sec3)[["(Intercept)"]]`      |
+| 3-factor market beta      | `r coef(fac3.sec3)[["Mkt_RF"]]`           |
+| 3-factor size beta        | `r coef(fac3.sec3)[["SMB"]]`              |
+| 3-factor value beta       | `r coef(fac3.sec3)[["HML"]]`              |
+| 3-factor R<sup>2</sup>    | `r summary(fac3.sec3)$r.squared`          |
+
+
+Performing at its CAPM benchmark (alpha = 0).  
+Highly correlated with growth stocks.
+High R<sup>2</sup> in 3-factor model.
+Looks like an actively managed mutual fund of tech stocks.
+
+
+<br />
+### Question 4
+For each mystery security, does it have a small or large amount of idiosyncratic risk?
+
+Security 1:   
+CAPM R<sup>2</sup> = 63%   
+3-factor R<sup>2</sup> = 63%   
+
+About 37% of security 1's volatility is due to idiosyncratic (asset-specific) risk. 
+
+Security 2:  
+CAPM R<sup>2</sup> = 8.3%   
+3-factor R<sup>2</sup> = 15%   
+
+About 85-90% of security 2's volatility is due to idiosyncratic (asset-specific) risk. 
+
+Security 3:  
+CAPM R<sup>2</sup> = 67%   
+3-factor R<sup>2</sup> = 82%   
+
+About 20-30% of security 3's volatility is due to idiosyncratic (asset-specific) risk. 
+
+
+
+<br />
+### Question 5
+For each mystery security, what portfolio combination of US Stock Market and Treasury Bills will
+yield the same CAPM BETA? 
+
+CAPM BETA is the correlation between the asset's excess returns and the market's excess returns.
+What combination of Mkt + RF yields the same correlation?
+
+$$
+\begin{align*}
+[(w_1 \cdot Mkt + w_2 \cdot RF) - RF] &= \beta [ Mkt - RF ]
+\\\\
+(w_1 \cdot Mkt + (1 - w_1) \cdot RF)  &= RF + \beta [ Mkt - RF ]
+\\\\
+w_1 \cdot Mkt + RF - w_1 \cdot RF  &= RF + \beta \cdot Mkt - \beta \cdot RF
+\\\\
+w_1 \cdot Mkt - w_1 \cdot RF  &= \beta \cdot Mkt - \beta \cdot RF
+\end{align*}
+$$
+
+So in a portfolio combining the US Stock Market and Treasury Bills, the weight of US Stock Market
+allocation (\(w_1\)) corresponds to the CAPM beta for the portfolio.
